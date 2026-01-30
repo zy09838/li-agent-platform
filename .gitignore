@@ -1,0 +1,59 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.cursor/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+*.egg
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Model files (too large for git)
+*.pt
+*.pkl
+*.pth
+*.onnx
+*.h5
+
+# Dataset files
+training/datasets/
+training/dataset_raw/
+training/runs/
+training/evaluation_results/
+
+# Audio test files
+听觉测试模型/*.wav
+
+# Vercel
+.vercel

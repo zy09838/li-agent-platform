@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理链智能体协作平台 - 供应链全栈协同</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lx: {
+                            black: '#1a1a1a',
+                            darkGrey: '#2d2d2d',
+                            gold: '#cfa972',
+                            goldHover: '#b5905a',
+                            white: '#ffffff',
+                            bgLight: '#f5f6f7',
+                            textMain: '#111',
+                            textSub: '#888',
+                            error: '#d9534f',
+                            warning: '#f0ad4e',
+                            success: '#4caf50'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"PingFang SC"', '"Helvetica Neue"', 'Helvetica', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-lx-bgLight text-lx-textMain antialiased">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

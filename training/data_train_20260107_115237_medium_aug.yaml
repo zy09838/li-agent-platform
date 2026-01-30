@@ -1,0 +1,15 @@
+path: /home/dell/桌面/智能体协作平台_0101/training/datasets_train_20260107_115237_medium_aug
+train: images/train
+val: images/val
+test: images/test
+
+# Classes
+names:
+  0: 划伤
+  1: 抛光印
+  2: 水渍
+  3: 磕伤
+  4: 贴纸
+  5: 针孔
+  6: 顶包
+  7: 颗粒

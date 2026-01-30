@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Collaboration Platform - Neural Mesh Prototype</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0f;
+            --card-bg: rgba(20, 20, 30, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #8899a6;
+            --accent-blue: #3b82f6;
+            --accent-gold: #cfa972;
+            --accent-red: #ef4444;
+            --accent-green: #22c55e;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Background Grid */
+        .grid-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Container */
+        .mesh-container {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            z-index: 10;
+        }
+
+        /* Center Brain */
+        .core-node {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #4f46e5, #1e1b4b);
+            box-shadow: 0 0 50px rgba(79, 70, 229, 0.4);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .core-node::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid rgba(79, 70, 229, 0.3);
+            border-radius: 50%;
+            animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        .core-icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .core-label {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Orbit Ring */
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Agent Nodes */
+        .agent-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: rgba(30, 30, 40, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+
+        .agent-node:hover {
+            transform: scale(1.1);
+            border-color: var(--node-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .agent-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .agent-name {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Stats Popup */
+        .stats-popup {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: rgba(10, 10, 20, 0.95);
+            border: 1px solid var(--node-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            width: 140px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .agent-node:hover .stats-popup {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            top: -85px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+        
+        .stat-val {
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        /* Connecting Lines (Canvas) */
+        #connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        /* UI Overlay */
+        .overlay {
+            position: absolute;
+            bottom: 30px;
+            width: 80%;
+            max-width: 800px;
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 50;
+        }
+
+        .log-title {
+            font-size: 12px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .log-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            height: 60px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .log-item {
+            display: flex;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .time { color: #555; }
+        .source { color: var(--accent-blue); font-weight: bold; }
+        .message { color: #ccc; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <div class="mesh-container">
+        <canvas id="connections"></canvas>
+
+        <!-- Orbit Ring -->
+        <div class="orbit-ring"></div>
+
+        <!-- Center Brain -->
+        <div class="core-node">
+            <div class="core-icon">🧠</div>
+            <div class="core-label">COGNITIVE</div>
+        </div>
+
+        <!-- Agent 1: Vision -->
+        <div class="agent-node" id="vision" style="--node-color: #3b82f6; --glow-color: rgba(59, 130, 246, 0.4);">
+            <div class="stats-popup">
+                <div class="stat-row"><span>Status</span><span class="stat-val" style="color: #22c55e">Active</span></div>
+                <div class="stat-row"><span>FPS</span><span class="stat-val">24.5</span></div>
+                <div class="stat-row"><span>Defects</span><span class="stat-val">3</span></div>
+            </div>
+            <div class="agent-icon" style="color: #3b82f6">👁️</div>
+            <div class="agent-name">Vision</div>
+        </div>
+
+        <!-- Agent 2: Audio -->
+        <div class="agent-node" id="audio" style="--node-color: #a855f7; --glow-color: rgba(168, 85, 247, 0.4);">
+            <div class="stats-popup">
+                <div class="stat-row"><span>Status</span><span class="stat-val" style="color: #22c55e">Monitoring</span></div>
+                <div class="stat-row"><span>dB Level</span><span class="stat-val">45dB</span></div>
+                <div class="stat-row"><span>Score</span><span class="stat-val">98</span></div>
+            </div>
+            <div class="agent-icon" style="color: #a855f7">👂</div>
+            <div class="agent-name">Audio</div>
+        </div>
+
+        <!-- Agent 3: Plan -->
+        <div class="agent-node" id="plan" style="--node-color: #cfa972; --glow-color: rgba(207, 169, 114, 0.4);">
+            <div class="stats-popup">
+                <div class="stat-row"><span>Schedule</span><span class="stat-val" style="color: #22c55e">On Track</span></div>
+                <div class="stat-row"><span>OTD</span><span class="stat-val">96.8%</span></div>
+                <div class="stat-row"><span>Jobs</span><span class="stat-val">12</span></div>
+            </div>
+            <div class="agent-icon" style="color: #cfa972">📅</div>
+            <div class="agent-name">Plan</div>
+        </div>
+
+        <!-- Agent 4: Quality -->
+        <div class="agent-node" id="quality" style="--node-color: #ef4444; --glow-color: rgba(239, 68, 68, 0.4);">
+            <div class="stats-popup">
+                <div class="stat-row"><span>Status</span><span class="stat-val" style="color: #eab308">Analyzing</span></div>
+                <div class="stat-row"><span>Yield</span><span class="stat-val">99.2%</span></div>
+                <div class="stat-row"><span>Hold</span><span class="stat-val">5</span></div>
+            </div>
+            <div class="agent-icon" style="color: #ef4444">🛡️</div>
+            <div class="agent-name">Quality</div>
+        </div>
+
+        <!-- Agent 5: Risk -->
+        <div class="agent-node" id="risk" style="--node-color: #22c55e; --glow-color: rgba(34, 197, 94, 0.4);">
+            <div class="stats-popup">
+                <div class="stat-row"><span>Risk Lvl</span><span class="stat-val" style="color: #22c55e">Low</span></div>
+                <div class="stat-row"><span>Suppliers</span><span class="stat-val">47</span></div>
+                <div class="stat-row"><span>Alerts</span><span class="stat-val">0</span></div>
+            </div>
+            <div class="agent-icon" style="color: #22c55e">🌩️</div>
+            <div class="agent-name">Risk</div>
+        </div>
+
+    </div>
+
+    <!-- Live Log -->
+    <div class="overlay">
+        <div class="log-title">
+            <span class="pulsing-dot" style="width: 8px; height: 8px; background: #cfa972; border-radius: 50%; display: inline-block;"></span>
+            LIVE SYSTEM LOG
+        </div>
+        <div class="log-content" id="logPanel">
+            <!-- Logs injected by JS -->
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('connections');
+        const ctx = canvas.getContext('2d');
+        const meshContainer = document.querySelector('.mesh-container');
+        
+        // Resize canvas
+        function resize() {
+            canvas.width = meshContainer.clientWidth;
+            canvas.height = meshContainer.clientHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Agents configuration
+        const agents = [
+            { id: 'vision', angle: 0 },
+            { id: 'quality', angle: 72 },
+            { id: 'risk', angle: 144 },
+            { id: 'plan', angle: 216 },
+            { id: 'audio', angle: 288 }
+        ];
+
+        const RADIUS = 250;
+        const CENTER_X = 400;
+        const CENTER_Y = 400;
+
+        // Position agents
+        function updatePositions() {
+            agents.forEach(agent => {
+                const radian = (agent.angle * Math.PI) / 180;
+                const x = CENTER_X + RADIUS * Math.cos(radian);
+                const y = CENTER_Y + RADIUS * Math.sin(radian);
+                
+                const el = document.getElementById(agent.id);
+                el.style.left = `${x - 40}px`; // center offset
+                el.style.top = `${y - 40}px`;
+                
+                agent.x = x;
+                agent.y = y;
+            });
+        }
+
+        // Draw connections
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw lines from Center to Agents
+            agents.forEach(agent => {
+                ctx.beginPath();
+                ctx.moveTo(CENTER_X, CENTER_Y);
+                ctx.lineTo(agent.x, agent.y);
+                
+                // Gradient line
+                const gradient = ctx.createLinearGradient(CENTER_X, CENTER_Y, agent.x, agent.y);
+                gradient.addColorStop(0, 'rgba(79, 70, 229, 0.5)');
+                gradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Animated particle on the line
+                const time = Date.now() / 1000;
+                const offset = (time % 1); // 0 to 1
+                const pX = CENTER_X + (agent.x - CENTER_X) * offset;
+                const pY = CENTER_Y + (agent.y - CENTER_Y) * offset;
+
+                ctx.beginPath();
+                ctx.arc(pX, pY, 3, 0, Math.PI * 2);
+                ctx.fillStyle = '#cfa972';
+                ctx.fill();
+            });
+
+            // Rotate agents slightly
+            agents.forEach(a => a.angle += 0.1);
+            updatePositions();
+
+            requestAnimationFrame(draw);
+        }
+
+        // Simulated Logs
+        const logs = [
+            { src: 'PLAN', msg: 'Schedule optimized for Line #7' },
+            { src: 'VISION', msg: 'Defect detected: Scratch at [204, 510]' },
+            { src: 'QUALITY', msg: 'Hold ticket #882 created automatically' },
+            { src: 'RISK', msg: 'Supplier "Nvidia" delay alert confirmed' },
+            { src: 'AUDIO', msg: 'Motor noise level peak: 62dB (Normal)' },
+            { src: 'COGNITIVE', msg: 'Correlating Vision defect with Supplier batch' }
+        ];
+        
+        function addLog() {
+            const logPanel = document.getElementById('logPanel');
+            const logData = logs[Math.floor(Math.random() * logs.length)];
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            div.innerHTML = `
+                <span class="time">[${time}]</span>
+                <span class="source">${logData.src}</span>
+                <span class="message">${logData.msg}</span>
+            `;
+            
+            logPanel.prepend(div);
+            if (logPanel.children.length > 5) logPanel.lastChild.remove();
+        }
+
+        // Start
+        updatePositions();
+        draw();
+        setInterval(addLog, 2000);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "model_id": "5ffc45bc",
+  "model_name": "螺栓缺失检测_0107_48张",
+  "part_type": "electric_drive",
+  "deployed_at": "2026-01-07T13:16:17.816534",
+  "metrics": {
+    "loss": 37.3745,
+    "precision": 0.9964,
+    "recall": 1.0
+  },
+  "classes": [
+    "Defect"
+  ]
+}

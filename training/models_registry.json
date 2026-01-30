@@ -1,0 +1,432 @@
+{
+  "models": [
+    {
+      "id": "efda65d9",
+      "name": "测试训练_漆面缺陷",
+      "run_name": "train_20251216_153253_nano",
+      "model_path": "/Users/zhuyanbin/Desktop/视觉缺陷检测_历史版本/漆面_目标检测_历史版本/漆面_目标检测平台_1216/training/runs/train_20251216_153253_nano/weights/best.pt",
+      "model_size": "nano",
+      "epochs": 5,
+      "dataset": "dataset_raw",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 7,
+      "created_at": "2025-12-16T15:33:34.623977",
+      "metrics": {
+        "loss": 67.9551,
+        "precision": 0.001,
+        "recall": 0.1111
+      },
+      "augment": false,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed": false
+    },
+    {
+      "id": "5f15986c",
+      "name": "测试1216",
+      "run_name": "train_20251216_212330_nano_aug",
+      "model_path": "/Users/zhuyanbin/Desktop/视觉缺陷检测_历史版本/漆面_目标检测_历史版本/漆面_目标检测平台_1216/training/runs/train_20251216_212330_nano_aug/weights/best.pt",
+      "model_size": "nano",
+      "epochs": 10,
+      "dataset": "dataset_raw",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 7,
+      "created_at": "2025-12-16T21:31:57.762452",
+      "metrics": {
+        "loss": 17.3678,
+        "precision": 0.0051,
+        "recall": 0.5556
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed": false
+    },
+    {
+      "id": "8ff45369",
+      "name": "实验台架测试V01",
+      "run_name": "train_20251226_100049_medium_aug",
+      "model_path": "/Users/zhuyanbin/Desktop/漆面_目标检测平台_1230/training/runs/train_20251226_100049_medium_aug/weights/best.pt",
+      "model_size": "medium",
+      "epochs": 10,
+      "dataset": "dataset_raw",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "水渍",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 8,
+      "created_at": "2025-12-26T10:12:25.545984",
+      "metrics": {
+        "loss": 26.7698,
+        "precision": 0.4315,
+        "recall": 0.6827
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed": false
+    },
+    {
+      "id": "e3f924e3",
+      "name": "测试_1230",
+      "run_name": "train_20251230_151332_nano_aug",
+      "model_path": "/Users/zhuyanbin/Desktop/漆面_目标检测平台_1230/training/runs/train_20251230_151332_nano_aug/weights/best.pt",
+      "model_size": "nano",
+      "epochs": 100,
+      "dataset": "dataset_raw",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "水渍",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 8,
+      "created_at": "2025-12-30T15:40:52.625476",
+      "metrics": {
+        "loss": 16.6162,
+        "precision": 0.5727,
+        "recall": 0.6563
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed": false,
+      "deployed_at": "2025-12-30T16:22:22.695456"
+    },
+    {
+      "id": "81991f24",
+      "name": "默认训练数据集_model_1230",
+      "run_name": "train_20251230_175957_nano_aug",
+      "model_path": "/Users/zhuyanbin/Desktop/漆面_目标检测平台_1230/training/runs/train_20251230_175957_nano_aug/weights/best.pt",
+      "model_size": "nano",
+      "epochs": 100,
+      "dataset": "training_datasets/3d15182a",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "水渍",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 8,
+      "created_at": "2025-12-30T18:31:52.679394",
+      "metrics": {
+        "loss": 12.8569,
+        "precision": 0.5833,
+        "recall": 0.636
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed": true,
+      "deployed_parts": {
+        "electric_drive": {
+          "deployed_at": "2026-01-06T23:50:42.178740"
+        }
+      },
+      "deployed_at": "2026-01-06T23:50:42.178747",
+      "deployed_part_type": "electric_drive"
+    },
+    {
+      "id": "audio_train_20260101_221913",
+      "name": "音频异常检测_20260101_222001",
+      "type": "audio_anomaly",
+      "dataset_id": "5cdd95de",
+      "model_path": "/Users/zhuyanbin/Desktop/漆面_目标检测平台_1230/training/runs/audio_train_20260101_221913/audio_model.pkl",
+      "metrics": {
+        "accuracy": 0.8333333333333334,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "config": {
+        "contamination": 0.1,
+        "useEnhancedFeatures": true
+      },
+      "created_at": "2026-01-01T22:20:01.770818",
+      "deployed": false,
+      "deployed_at": "2026-01-01T23:24:53.134861"
+    },
+    {
+      "id": "cd6a1b2a",
+      "name": "螺栓检测_0107_S",
+      "version": 1,
+      "version_tag": "untagged",
+      "run_name": "train_20260107_114649_small_aug",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/train_20260107_114649_small_aug/weights/best.pt",
+      "model_size": "small",
+      "epochs": 100,
+      "dataset": "training_datasets/1305a45e",
+      "classes": [
+        "Defect"
+      ],
+      "num_classes": 1,
+      "created_at": "2026-01-07T11:50:10.617728",
+      "metrics": {
+        "loss": 33.7931,
+        "precision": 0.9925,
+        "recall": 1.0
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed_parts": {
+        "electric_drive": {
+          "deployed_at": "2026-01-07T11:50:54.769570"
+        }
+      },
+      "deployed": true,
+      "deployed_at": "2026-01-07T11:50:54.769577",
+      "deployed_part_type": "electric_drive"
+    },
+    {
+      "id": "ede4168f",
+      "name": "漆面缺陷检测_0107_M",
+      "version": 1,
+      "version_tag": "untagged",
+      "run_name": "train_20260107_115237_medium_aug",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/train_20260107_115237_medium_aug/weights/best.pt",
+      "model_size": "medium",
+      "epochs": 150,
+      "dataset": "dataset_raw",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "水渍",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 8,
+      "created_at": "2026-01-07T12:30:24.344510",
+      "metrics": {
+        "loss": 18.4807,
+        "precision": 0.7069,
+        "recall": 0.7179
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed_parts": {
+        "paint": {
+          "deployed_at": "2026-01-07T12:33:05.674045"
+        }
+      },
+      "deployed": true,
+      "deployed_at": "2026-01-07T12:33:05.674051",
+      "deployed_part_type": "paint"
+    },
+    {
+      "id": "5ffc45bc",
+      "name": "螺栓缺失检测_0107_48张",
+      "version": 1,
+      "version_tag": "untagged",
+      "run_name": "train_20260107_123521_nano_aug",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/train_20260107_123521_nano_aug/weights/best.pt",
+      "model_size": "nano",
+      "epochs": 100,
+      "dataset": "training_datasets/1305a45e",
+      "classes": [
+        "Defect"
+      ],
+      "num_classes": 1,
+      "created_at": "2026-01-07T12:43:42.365524",
+      "metrics": {
+        "loss": 37.3745,
+        "precision": 0.9964,
+        "recall": 1.0
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed",
+      "deployed_parts": {
+        "electric_drive": {
+          "deployed_at": "2026-01-07T13:16:17.816798"
+        }
+      },
+      "deployed": true,
+      "deployed_at": "2026-01-07T13:16:17.816805",
+      "deployed_part_type": "electric_drive"
+    },
+    {
+      "id": "116f3d35",
+      "name": "漆面检测_0107_包含正样本",
+      "version": 1,
+      "version_tag": "untagged",
+      "run_name": "train_20260107_182308_medium_aug",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/train_20260107_182308_medium_aug/weights/best.pt",
+      "model_size": "medium",
+      "epochs": 200,
+      "dataset": "training_datasets/3d15182a",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "水渍",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 8,
+      "created_at": "2026-01-07T18:52:03.339880",
+      "metrics": {
+        "loss": 17.9283,
+        "precision": 0.6603,
+        "recall": 0.7429
+      },
+      "augment": true,
+      "imgsz": 640,
+      "status": "completed"
+    },
+    {
+      "id": "7acb4e22",
+      "name": "漆面检测_不增强",
+      "version": 1,
+      "version_tag": "untagged",
+      "run_name": "train_20260107_185510_small",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/train_20260107_185510_small/weights/best.pt",
+      "model_size": "small",
+      "epochs": 100,
+      "dataset": "training_datasets/3d15182a",
+      "classes": [
+        "划伤",
+        "抛光印",
+        "水渍",
+        "磕伤",
+        "贴纸",
+        "针孔",
+        "顶包",
+        "颗粒"
+      ],
+      "num_classes": 8,
+      "created_at": "2026-01-07T18:57:35.024201",
+      "metrics": {
+        "loss": 4.3344,
+        "precision": 0.6435,
+        "recall": 0.7139
+      },
+      "augment": false,
+      "imgsz": 640,
+      "status": "completed"
+    },
+    {
+      "id": "audio_train_20260111_220623",
+      "name": "音频异常检测_20260111_221102",
+      "type": "audio_anomaly",
+      "dataset_id": "b715741e",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/audio_train_20260111_220623/audio_model.pkl",
+      "metrics": {
+        "accuracy": 0.6451612903225806,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "config": {
+        "contamination": 0.45,
+        "featureSelection": "hybrid",
+        "topFeatures": 15,
+        "useEnhancedFeatures": true
+      },
+      "created_at": "2026-01-11T22:11:02.017028",
+      "deployed": false,
+      "deployed_at": "2026-01-11T23:03:36.307420"
+    },
+    {
+      "id": "audio_train_20260111_230328",
+      "name": "音频异常检测_20260111_230753",
+      "type": "audio_anomaly",
+      "dataset_id": "b715741e",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/audio_train_20260111_230328/audio_model.pkl",
+      "metrics": {
+        "accuracy": 0.8709677419354839,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "config": {
+        "contamination": 0.1,
+        "featureSelection": "hybrid",
+        "topFeatures": 30,
+        "useEnhancedFeatures": true
+      },
+      "created_at": "2026-01-11T23:07:53.629851",
+      "deployed": false,
+      "deployed_at": "2026-01-11T23:08:20.983485"
+    },
+    {
+      "id": "audio_train_20260112_085749",
+      "name": "音频异常检测_20260112_091013",
+      "type": "audio_anomaly",
+      "dataset_id": "b911f8ff",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/audio_train_20260112_085749/audio_model.pkl",
+      "metrics": {
+        "accuracy": 0.9333333333333333,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "config": {
+        "contamination": 0.1,
+        "featureSelection": "hybrid",
+        "topFeatures": 30,
+        "useEnhancedFeatures": true
+      },
+      "created_at": "2026-01-12T09:10:13.506044",
+      "deployed": true,
+      "deployed_at": "2026-01-12T15:44:36.545210"
+    },
+    {
+      "id": "audio_train_20260112_133610",
+      "name": "音频异常检测_20260112_134125",
+      "type": "audio_anomaly",
+      "dataset_id": "b715741e",
+      "model_path": "/home/dell/桌面/智能体协作平台_0101/training/runs/audio_train_20260112_133610/audio_model.pkl",
+      "metrics": {
+        "accuracy": 0.9375,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "config": {
+        "contamination": 0.1,
+        "featureSelection": "hybrid",
+        "topFeatures": 30,
+        "useEnhancedFeatures": true
+      },
+      "created_at": "2026-01-12T13:41:25.646270",
+      "deployed": false
+    }
+  ]
+}

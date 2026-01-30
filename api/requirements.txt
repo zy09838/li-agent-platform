@@ -1,0 +1,24 @@
+# Vercel Serverless Functions Python 依赖
+# 注意：总大小需要控制在 250MB 以内
+
+# 基础依赖
+requests>=2.28.0
+Pillow>=9.0.0
+
+# LLM 服务 - 无额外依赖
+
+# YOLO 检测服务 (可选，需要 Vercel Pro)
+# 取消注释以启用 YOLO 推理
+# ultralytics>=8.0.0
+# opencv-python-headless>=4.5.0
+# numpy>=1.20.0
+
+# 音频检测服务 (可选，需要 Vercel Pro)
+# 取消注释以启用音频检测
+# librosa>=0.10.0
+# scikit-learn>=1.1.0
+# joblib>=1.0.0
+# scipy>=1.6.0
+
+# Vercel Blob Storage SDK
+# vercel-storage>=0.1.0

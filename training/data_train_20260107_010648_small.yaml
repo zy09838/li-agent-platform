@@ -1,0 +1,8 @@
+path: /Users/zhuyanbin/Desktop/智能体协作平台_0101/training/datasets_train_20260107_010648_small
+train: images/train
+val: images/val
+test: images/test
+
+# Classes
+names:
+  0: Defect

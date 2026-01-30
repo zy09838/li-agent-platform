@@ -1,0 +1,12 @@
+{
+  "model_id": "audio_train_20260112_085749",
+  "model_name": "音频异常检测_20260112_091013",
+  "deployed_at": "2026-01-12T15:44:36.545008",
+  "metrics": {
+    "accuracy": 0.9333333333333333,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "dataset_id": "b911f8ff"
+}

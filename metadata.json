@@ -1,0 +1,8 @@
+{
+  "name": "LiChain Agent Platform",
+  "description": "A comprehensive supply chain collaboration platform featuring 5 intelligent agents for visual inspection, NVH audio analysis, planning, risk management, and quality control.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
